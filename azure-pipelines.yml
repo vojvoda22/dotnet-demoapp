@@ -13,11 +13,6 @@ steps:
     packageType: 'sdk'
     version: '6.0.x'  # Be specific for reliability
 
-- task: NuGetCommand@2
-  inputs:
-    command: 'restore'
-    restoreSolution: '**/*.sln'
-    feedsToUse: 'select'
 
 - task: DotNetCoreCLI@2
   inputs:
@@ -25,6 +20,11 @@ steps:
     projects: '**/*.csproj'
     arguments: '--configuration $(buildConfiguration)'
 
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'restore'
+    projects: '**/*.csproj'
+    feedsToUse: 'select'
 - task: DotNetCoreCLI@2
   inputs:
     command: 'publish'
